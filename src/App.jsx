@@ -31,6 +31,7 @@ function App() {
     const unsubscribe = onSnapshot(moviesCollectionRef, (snapshot) => {
       // we have an id in doc but we want to have id inside doc.data() which will be our filteredData
       const filteredData = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      console.log(filteredData)
       setMovieList(filteredData)
     }, (error) => {
       console.error(error)
@@ -49,7 +50,7 @@ function App() {
       })
       setMovieInputs({
         movieName: "",
-        releasedDate:null
+        releasedDate: null
       })
       // in the rules section in firebase we are going to make changes
       // allow read: if True
@@ -100,24 +101,29 @@ function App() {
     }
   }
   return (
-    <>
+    <div className='mx-auto p-2 w-[100%] sm:w-[70%] xl:w-[50%]'>
+      <div className="w-full mb-2 flex justify-center items-center">
+        <h1 className='font-extrabold mx-auto text-purple-600 text-5xl '>FIREBASE APP</h1>
+      </div>
       {authUser ? <div className='flex gap-5'><button className='border-4 border-red-400 bg-yellow-300 text-bold text-lg p-2 m-2 rounded-lg'>{`Logged in as ${auth?.currentUser?.displayName}`}</button><button onClick={logout} className='bg-black text-lg m-2 p-2 rounded-lg text-white'>Logout</button></div> : <UserAuth />}
-      <div>
+      <div className='flex flex-col justify-center gap-4'>
         <input className='border-2 m-2 rounded-md border-black p-2' type="text" name="movieName" value={movieInputs.movieName} placeholder='Movie name' onChange={handleMovieChange} />
         <input className='border-2 m-2 rounded-md border-black p-2' type="number" name='releasedDate' value={movieInputs.releasedDate || ''} placeholder='Released date' onChange={handleMovieChange} />
-        <input type="checkbox" name='recievedAnOscar' checked={recievedAnOscar} onChange={(e) => setRecievedAnOscar(e.target.checked)} />
-        <label htmlFor="recievedAnOscar">Recieved an Oscar</label>
-        <button className='bg-gray-400 border-2 rounded-lg border-black text-black p-2 m-2' onClick={onSubmitMovie} type="submit">Submit Movie</button>
+        <div>
+          <input type="checkbox" name='recievedAnOscar' checked={recievedAnOscar} onChange={(e) => setRecievedAnOscar(e.target.checked)} />
+          <label className='text-lg ml-1' htmlFor="recievedAnOscar">Recieved an Oscar</label>
+        </div>
+        <button className='bg-green-400 hover:bg-red-600 hover:text-white border-2 rounded-lg border-black text-lg text-black font-bold p-2 m-2' onClick={onSubmitMovie} type="submit">Submit Movie</button>
       </div>
 
-      <div>
+      <div className='m-2 border-4 rounded-xl p-2 border-black'>
         {movieList.map((movie) => (
           <div key={movie.id}>
             <h1 className='text-2xl font-bold' style={{ color: movie.recievedAnOscar ? 'green' : 'red' }}>{movie.Name}</h1>
             <p className='text-lg text-black'>{movie.releasedate}</p>
-            <input className='border-2 border-black p-2 m-2' type="text" onChange={(e) => setUpdatedTitle(e.target.value)} placeholder='Update Movie Title' />
-            <button className='bg-black text-white p-2 m-2 rounded-lg' onClick={() => deleteMovie(movie.id)}>Delete</button>
-            <button className='bg-black text-white p-2 m-2 rounded-lg' onClick={() => updateMovie(movie.id)}>Update</button>
+            <input className='border-2 border-black p-1 m-1' type="text" onChange={(e) => setUpdatedTitle(e.target.value)} placeholder='Update Movie Title' />
+            <button className='bg-black text-white p-2 m-1 rounded-lg' onClick={() => deleteMovie(movie.id)}>Delete</button>
+            <button className='bg-black text-white p-2 m-1 rounded-lg' onClick={() => updateMovie(movie.id)}>Update</button>
           </div>
         ))}
       </div>
@@ -126,7 +132,7 @@ function App() {
         <input className='border-1 border-yellow-400 bg-yellow-300 p-2 m-2 rounded-lg' type="file" onChange={(e) => setFileUpload(e.target.files[0])} />
         <button className='rounded-lg border-2 border-black bg-sky-300 p-2 m-2' onClick={uploadFile}>Upload File</button>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -38,16 +38,16 @@ export const UserAuth = () => {
     }
     return (
         <>
-            <div className='flex flex-col w-80'>
-                <input className='border-2 m-2 border-black p-1' type="text" onChange={handleChange} name='email' placeholder='Email...' />
-                <input className='border-2 m-2 border-black p-1' type="text" onChange={handleChange} name='password' placeholder='Password...' />
+            <div className='flex flex-col'>
+                <input className='border-2 m-2 rounded-md border-black p-1' type="text" onChange={handleChange} name='email' placeholder='Email...' />
+                <input className='border-2 m-2 rounded-md border-black p-1' type="text" onChange={handleChange} name='password' placeholder='Password...' />
                 <button className='bg-red-500 m-2 p-2 rounded-lg text-white' onClick={signIn}>Sign In</button>
             </div>
-            <div className='w-80'>
-                <button onClick={signInWithGoogle} className='bg-sky-500 text-lg m-2 p-3 rounded-lg text-white'>Sign In With Google</button>
+            <div className='p-2'>
+                <button onClick={signInWithGoogle} className='bg-sky-500 w-full text-lg p-2 rounded-lg text-white'>Sign In With Google</button>
             </div>
-            <div className="w-80">
-                <button onClick={logout} className='bg-black text-lg m-2 p-3 rounded-lg text-white'>Logout</button>
+            <div className='p-2'>
+                <button onClick={logout} className='bg-black text-lg p-2 w-full rounded-lg text-white'>Logout</button>
             </div>
         </>
     )
