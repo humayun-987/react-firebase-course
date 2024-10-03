@@ -103,9 +103,9 @@ function App() {
   return (
     <div className='mx-auto p-2 w-[100%] sm:w-[70%] xl:w-[50%]'>
       <div className="w-full mb-2 flex justify-center items-center">
-        <h1 className='font-extrabold mx-auto text-purple-600 text-5xl '>FIREBASE APP</h1>
+        <h1 className='font-extrabold mx-auto text-gray-200 text-5xl my-6'>FIREBASE APP</h1>
       </div>
-      {authUser ? <div className='flex gap-5'><button className='border-4 border-red-400 bg-yellow-300 text-bold text-lg p-2 m-2 rounded-lg'>{`Logged in as ${auth?.currentUser?.displayName}`}</button><button onClick={logout} className='bg-black text-lg m-2 p-2 rounded-lg text-white'>Logout</button></div> : <UserAuth />}
+      {authUser ? <div className='flex gap-5'><button className='border-4 border-red-400 bg-yellow-300 text-black text-bold text-lg p-2 m-2 rounded-lg'>{`Logged in as ${auth?.currentUser?.displayName}`}</button><button onClick={logout} className='bg-black text-lg m-2 p-2 rounded-lg text-white'>Logout</button></div> : <UserAuth />}
       <div className='flex flex-col justify-center gap-4'>
         <input className='border-2 m-2 rounded-md border-black p-2' type="text" name="movieName" value={movieInputs.movieName} placeholder='Movie name' onChange={handleMovieChange} />
         <input className='border-2 m-2 rounded-md border-black p-2' type="number" name='releasedDate' value={movieInputs.releasedDate || ''} placeholder='Released date' onChange={handleMovieChange} />
@@ -120,7 +120,7 @@ function App() {
         {movieList.map((movie) => (
           <div key={movie.id}>
             <h1 className='text-2xl font-bold' style={{ color: movie.recievedAnOscar ? 'green' : 'red' }}>{movie.Name}</h1>
-            <p className='text-lg text-black'>{movie.releasedate}</p>
+            <p className='text-lg text-white'>{movie.releasedate}</p>
             <input className='border-2 border-black p-1 m-1' type="text" onChange={(e) => setUpdatedTitle(e.target.value)} placeholder='Update Movie Title' />
             <button className='bg-black text-white p-2 m-1 rounded-lg' onClick={() => deleteMovie(movie.id)}>Delete</button>
             <button className='bg-black text-white p-2 m-1 rounded-lg' onClick={() => updateMovie(movie.id)}>Update</button>
@@ -129,8 +129,8 @@ function App() {
       </div>
 
       <div className='flex gap:20px'>
-        <input className='border-1 border-yellow-400 bg-yellow-300 p-2 m-2 rounded-lg' type="file" onChange={(e) => setFileUpload(e.target.files[0])} />
-        <button className='rounded-lg border-2 border-black bg-sky-300 p-2 m-2' onClick={uploadFile}>Upload File</button>
+        <input className='border-1 border-yellow-400 text-black bg-yellow-300 p-2 m-2 mx-6 rounded-lg' type="file" onChange={(e) => setFileUpload(e.target.files[0])} />
+        <button className='rounded-lg border-2 border-black text-black bg-sky-300 p-2 m-2' onClick={uploadFile}>Upload File</button>
       </div>
     </div>
   )
